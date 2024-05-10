@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -54,6 +55,8 @@ class BlogController extends Controller
             'excerpt' => $validated_data['excerpt'],
             'body' => $validated_data['blog-body'],
             'thumbnail' => $newFileName,
+            'category_id' => $request->category,
+            'user_id' => Auth::user()->id,
             'published' => $publish
         ]);
 
@@ -75,9 +78,9 @@ class BlogController extends Controller
      */
     public function edit(string $id)
     {
+        $categories = Category::get();
         $blog = Blog::find($id);
-
-        return view('admin.blogs.edit', ['blog' => $blog]);
+        return view('admin.blogs.edit', ['blog' => $blog, 'categories' => $categories]);
     }
 
     /**
@@ -85,6 +88,14 @@ class BlogController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        $publish = 0;
+        if (isset($request->publish)) {
+            $publish = 1;
+        } else {
+            $publish = 0;
+        }
+
         if ($request->thumbnail == null) {
             $validated_data = $request->validate([
                 'title' => 'required',
@@ -95,7 +106,9 @@ class BlogController extends Controller
             Blog::where('id', $id)->update([
                 'title' => $validated_data['title'],
                 'excerpt' => $validated_data['excerpt'],
-                'body' => $validated_data['blog-body']
+                'body' => $validated_data['blog-body'],
+                'published' => $publish,
+                'category_id' => $request->category,
             ]);
         } else {
             $image = Blog::select('thumbnail')->find($id)->thumbnail;
@@ -114,6 +127,8 @@ class BlogController extends Controller
                 'title' => $validated_data['title'],
                 'excerpt' => $validated_data['excerpt'],
                 'body' => $validated_data['blog-body'],
+                'category_id' => $request->category,
+                'published' => $publish,
                 'thumbnail' => $newFileName,
             ]);
         }

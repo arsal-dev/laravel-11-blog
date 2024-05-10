@@ -1,16 +1,18 @@
 <?php
 
+use App\Models\Blog;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Blog;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/show-blog/{id}', [HomeController::class, 'showBlog'])->name('show.blog');
 
 Route::get('/dashboard', function () {
-    $blogs = Blog::latest()->paginate(10);
+    $blogs = Blog::with('category')->where('user_id', Auth::user()->id)->latest()->paginate(10);
     return view('dashboard', ['blogs' => $blogs]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 

@@ -12,7 +12,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::get();
+        return view('admin.categories.all', ['categories' => $categories]);
     }
 
     /**
@@ -50,7 +51,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit', ['category' => $category]);
     }
 
     /**
@@ -58,7 +59,17 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $validated_data = $request->validate([
+            'name' => 'required'
+        ]);
+
+        $category_id = $category->id;
+
+        Category::where('id', $category_id)->update([
+            'name' => $validated_data['name']
+        ]);
+
+        return redirect('/categories')->with('success', 'category updated successfully');
     }
 
     /**
@@ -66,6 +77,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        Category::destroy($category->id);
+
+        return redirect('/categories')->with('success', 'category delete successfully');
     }
 }

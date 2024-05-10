@@ -24,6 +24,7 @@
                     <th scope="col">thumbnail</th>
                     <th scope="col">title</th>
                     <th scope="col">excerpt</th>
+                    <th scope="col">category</th>
                     <th scope="col">published</th>
                     <th scope="col">update</th>
                     <th scope="col">delete</th>
@@ -36,6 +37,7 @@
                         </th>
                         <td>{{ $blog->title }}</td>
                         <td>{{ $blog->excerpt }}</td>
+                        <td>{{ $blog->category->name }}</td>
                         <td>
                             @if ($blog->published == 1)
                                 YES

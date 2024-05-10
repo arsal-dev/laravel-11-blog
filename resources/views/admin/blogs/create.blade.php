@@ -28,14 +28,14 @@
                 <label for="excerpt">excerpt</label>
                 <input type="text" id="excerpt" value="{{ old('excerpt') }}" name="excerpt" class="form-control">
             </div>
-            {{-- <div>
+            <div>
                 <label for="categories">categories</label>
                 <select name="category" id="categories" class="form-control">
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
-            </div> --}}
+            </div>
             <div>
                 <label for="thumbnail">thumbnail</label>
                 <input type="file" id="thumbnail" name="thumbnail" class="form-control">

@@ -13,4 +13,10 @@ class HomeController extends Controller
         $blogs = Blog::latest()->where('published', 1)->paginate(5);
         return view('welcome', ['blogs' => $blogs]);
     }
+
+    public function showBlog($id)
+    {
+        $blog = Blog::find($id);
+        return view('show', ['blog' => $blog]);
+    }
 }

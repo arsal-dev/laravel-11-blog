@@ -51,8 +51,9 @@
                         <h2 class="subheading">{{ $blog->excerpt }}</h2>
                         <span class="meta">
                             Posted by
-                            <a href="#!">Me</a>
+                            <a href="#!">{{ $blog->user->name }}</a>
                             {{ $blog->created_at }}
+                            category - {{ $blog->category->name }}
                         </span>
                     </div>
                 </div>

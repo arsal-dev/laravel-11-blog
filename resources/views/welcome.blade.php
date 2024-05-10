@@ -63,15 +63,16 @@
                 @foreach ($blogs as $blog)
                     <!-- Post preview-->
                     <div class="post-preview">
-                        <a href="{{ route('blogs.show', $blog->id) }}">
+                        <a href="{{ route('show.blog', $blog->id) }}">
                             <img src='{{ asset("front-end/blog_images/$blog->thumbnail") }}' width="600px">
                             <h2 class="post-title">{{ $blog->title }}</h2>
                             <h3 class="post-subtitle">{{ $blog->excerpt }}</h3>
                         </a>
                         <p class="post-meta">
                             Posted by
-                            <a href="#!">Me</a>
+                            <a href="#!">{{ $blog->user->name }}</a>
                             on {{ $blog->created_at }}
+                            category - {{ $blog->category->name }}
                         </p>
                     </div>
                     <!-- Divider-->

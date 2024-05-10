@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('excerpt');
             $table->longText('body');
             $table->foreignId('category_id')->nullable()->references('id')->on('categories');
+            $table->foreignId('user_id')->nullable()->references('id')->on('users');
             $table->boolean('published');
             $table->timestamps();
         });

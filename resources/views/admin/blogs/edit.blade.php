@@ -40,9 +40,27 @@
                 <input type="file" id="thumbnail" name="thumbnail" class="form-control">
             </div>
             <div>
+                <label for="categories">categories</label>
+                <select name="category" id="categories" class="form-control">
+                    @foreach ($categories as $category)
+                        @if ($category->id == $blog->category_id)
+                            <option selected value="{{ $category->id }}">{{ $category->name }}</option>
+                        @else
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
+            <div>
                 <label for="blog-body">blog body</label>
                 <textarea name="blog-body" id="blog-body tiny" cols="30" rows="10" class="form-control">{{ old('blog-body', $blog->body) }}</textarea>
             </div>
+
+            <div>
+                <label for="publish">publish</label>
+                <input type="checkbox" id="publish" name="publish">
+            </div>
+
             <input type="submit" class="btn btn-primary mt-3">
         </form>
     </div>

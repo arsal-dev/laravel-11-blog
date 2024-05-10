@@ -11,6 +11,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+    <script src="https://cdn.tiny.cloud/1/3wo5r8ys547no5ev0ikv2u5wre6z1jihafgrz4cvxm9okl2r/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script>
 </head>
 
 <body class="bg-dark">
@@ -29,6 +31,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('blogs.create') }}">create blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('categories.index') }}">all categories</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('categories.create') }}">create categories</a>
